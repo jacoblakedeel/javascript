@@ -1,0 +1,43 @@
+.myBG{
+    background-color: rgb(77, 157, 223);
+}
+
+.whiteText{
+    color: white;
+}
+
+.blueText{
+    color: rgb(48, 164, 231);
+}
+
+
+.grayBG{
+    background-color: rgb(184, 181, 181);
+}
+
+.orangeBG{
+    background-color: rgb(226, 156, 25);
+}
+
+
+.header{
+    height: 200px;
+    width: 100%;
+
+    overflow: hidden;
+}
+
+.curse{
+    height: 180px;
+    width: 100%;
+}
+
+.reviews{
+    height: 50px;
+    width: 100%;
+}
+
+.whiteSection{
+    height: 100px;
+    width: 100%;
+}
