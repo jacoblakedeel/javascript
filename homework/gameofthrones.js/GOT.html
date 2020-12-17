@@ -32,6 +32,9 @@
                 text-shadow: silver;
                 margin-bottom: 5px;
             }
+            .coolFont{
+                font-family: 'Russo One', sans-serif;
+            }
         </style>
     </head>
     <body>
@@ -62,7 +65,7 @@
         <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title coolFont" id="exampleModalLabel">Modal title</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -71,8 +74,7 @@
             
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
         </div>
@@ -112,45 +114,43 @@
                     
                     let liTags = charList.map((char) => {
                         if(char.name.length > 0){
-                        return `<a href="${char.url} " class="list-group-item list-group-item-action link">${char.name}:<br>   <b>Houses: </b>  ${char.allegiances.length}</a>`
+                        return `<a href="${char.url}" class="list-group-item list-group-item-action link">${char.name}<br>   <b>Houses: </b>  ${char.allegiances.length}</a>`
                     }
                     })
                     
-                    listGroupContainer.html(liTags.join(''))
-
-                    let $div = $(".list-group");
-                    $div.click((e) => {
-                        
-                        e.preventDefault();
-
-                        $.get(e.target.href)
-                        .done((detailedCharObj) => {
-
-                            let $modalBody = $('.modal-body')
-                            let $modalTitle = $('#exampleModalLabel')
-
-                            $modalBody.html()
-
-                            $modalTitle.html(detailedCharObj.name)
-
-                            if(detailedCharObj.allegiances.length > 0){
-                                
-                                detailedCharObj.allegiances.forEach((houseUrl) => {
-                                    
-                                    $.get(houseUrl)
-                                    .done((houseObj) => {
-                                        $modalBody.html(`<br>${$modalBody.html()}<br>${houseObj.name}`)
-                                    })
-                                })
-                            }
-
-                            $('#exampleModal').modal('show');
-                        })
-                    })
-                }
-            })
-        
+                listGroupContainer.html(liTags.join(''))
+            }
         })
+    })
+    let $div = $(".list-group");
+                $div.click((e) => {
+                        
+                    e.preventDefault();
+
+                    $.get(e.target.href)
+                    .done((detailedCharObj) => {
+
+                        let $modalBody = $('.modal-body')
+                        let $modalTitle = $('#exampleModalLabel')
+
+                        $modalBody.html("")
+
+                        $modalTitle.html(detailedCharObj.name)
+
+                        if(detailedCharObj.allegiances.length > 0){
+                                
+                            detailedCharObj.allegiances.forEach((houseUrl) => {
+                                    
+                                $.get(houseUrl)
+                                .done((houseObj) => {
+                                    $modalBody.html(`<br>${$modalBody.html()}<br>${houseObj.name}`)
+                                })
+                            })
+                        }
+
+                        $('#exampleModal').modal('show');
+                    })
+                })
             
             
             </script>
